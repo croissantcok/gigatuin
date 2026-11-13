@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home - Gigatuin</title>
+<meta name="description" content="GigaTuin: tuintegels, bestrating, grind en tuinmaterialen van A-kwaliteit voor scherpe prijzen. Online bestellen of langskomen in onze showtuin in Waddinxveen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Huidige Gigatuin-kleuren */
+    --green:#6bc300;        /* hoofdgroen (knoppen, accenten) */
+    --green-dark:#5aa600;   /* hover */
+    --lime:#c6df00;         /* limoen uit de gradient */
+    --olive:#516305;        /* olijfgroen (logo, kleine labels) */
+    --ink:#121210;          /* tekst */
+    --ink-2:#5f6252;        /* secundaire tekst */
+    --line:#e3e5d8;
+    --soft:#f6f7f1;         /* rustige lichte achtergrond */
+    --white:#ffffff;
+    --deep:#1b2108;         /* donker olijf voor donkere secties */
+    --radius:16px;
+    --max:1160px;
+    --font:"Urbanist",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.55;font-size:17px}
+  img{display:block;max-width:100%}
+  a{color:var(--olive);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .skip{position:absolute;left:-999px}
+  .skip:focus{left:12px;top:12px;background:#fff;padding:8px 12px;z-index:99}
+
+  /* Dunne merkstreep + aankondiging */
+  .stripe{height:4px;background:linear-gradient(90deg,var(--green),var(--lime))}
+  .notice{background:var(--soft);font-size:13px;color:var(--ink-2);text-align:center;padding:9px 24px;font-weight:500}
+  .notice span+span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--green);margin:0 12px 2px}
+  .notice a{color:var(--ink);font-weight:600}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:32px;height:72px}
+  .nav .logo img{height:40px;width:auto;max-width:150px;object-fit:contain}
+  .nav ul{display:flex;gap:24px;list-style:none;flex:1;justify-content:center}
+  .nav ul a{white-space:nowrap;color:var(--ink);font-size:15px;font-weight:500;padding:6px 0;border-bottom:2px solid transparent}
+  .nav ul a:hover,.nav ul a.active{text-decoration:none;border-color:var(--green)}
+  .nav .tools{display:flex;gap:18px;align-items:center}
+  .nav .tools a{color:var(--ink);position:relative}
+  .nav .tools a:hover{text-decoration:none;color:var(--olive)}
+  .nav .tools svg{width:21px;height:21px;display:block}
+  .badge{position:absolute;top:-6px;right:-8px;background:var(--olive);color:#fff;font-size:10px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .rating{white-space:nowrap;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);padding-left:18px;border-left:1px solid var(--line)}
+  .rating b{color:var(--ink)}
+  .rating .stars{color:#f5b301;letter-spacing:1px}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:6px;color:var(--ink)}
+  .menu-btn svg{width:24px;height:24px}
+  .mobile{display:none;border-top:1px solid var(--line);padding:8px 24px 20px}
+  .mobile a{display:block;color:var(--ink);font-size:17px;font-weight:500;padding:12px 0;border-bottom:1px solid var(--line)}
+  .mobile.open{display:block}
+
+  /* Knoppen */
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:var(--ink);font-weight:600;font-size:16px;padding:13px 24px;border-radius:999px;transition:background .2s,transform .2s}
+  .btn:hover{background:var(--green-dark);text-decoration:none}
+  .btn.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+  .btn.ghost:hover{background:rgba(255,255,255,.12)}
+  .link-arrow{font-weight:600;color:var(--olive)}
+  .link-arrow::after{content:" →"}
+  .actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:30px}
+
+  /* Secties */
+  .tile{padding:100px 0}
+  .tile.soft{background:var(--soft)}
+  .tile.dark{background:var(--deep);color:#f2f4ea}
+  .tile.dark .sub,.tile.dark p{color:#b9bea6}
+  .tile.dark a:not(.btn){color:var(--lime)}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:700;color:var(--olive);margin-bottom:12px;letter-spacing:.06em;text-transform:uppercase}
+  .tile.dark .eyebrow{color:var(--lime)}
+  h1,h2{font-weight:700;letter-spacing:-.02em;line-height:1.08}
+  h1{font-size:clamp(40px,5.6vw,66px)}
+  h2{font-size:clamp(30px,3.8vw,44px)}
+  h3{font-size:18px;font-weight:600;line-height:1.3}
+  .sub{font-size:clamp(18px,1.8vw,20px);color:var(--ink-2);margin-top:16px;max-width:640px}
+  .center{text-align:center}
+  .center .sub{margin-left:auto;margin-right:auto}
+  .head{margin-bottom:52px}
+
+  /* Hero: rustige foto, geen slider, geen groen blok achter de kop */
+  .hero{position:relative;min-height:600px;display:flex;align-items:center;color:#fff;overflow:hidden;background:var(--deep)}
+  .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,22,6,.82) 0%,rgba(18,22,6,.55) 45%,rgba(18,22,6,.05) 80%)}
+  .hero .wrap{position:relative;z-index:1;width:100%}
+  .hero .inner{max-width:600px}
+  .hero .eyebrow{color:var(--lime)}
+  .hero h1 em{font-style:normal;color:var(--green)}
+  .hero p{font-size:19px;color:rgba(255,255,255,.85);margin-top:18px;max-width:520px}
+
+  /* USP-strook onder hero */
+  .usps{border-bottom:1px solid var(--line)}
+  .usps ul{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:22px 0}
+  .usps li{display:flex;gap:10px;align-items:center;font-size:15px;font-weight:500}
+  .usps li::before{content:"";flex:0 0 22px;height:22px;border-radius:50%;background:var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23121210' stroke-width='3'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat}
+
+  /* Categorieën */
+  .cats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .cat{background:var(--white);border-radius:var(--radius);overflow:hidden;color:var(--ink);border:1px solid var(--line);transition:transform .3s ease,box-shadow .3s ease}
+  .cat:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(27,33,8,.08);text-decoration:none}
+  .cat .img{aspect-ratio:4/3;background:#eceee3;overflow:hidden}
+  .cat .img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .cat:hover .img img{transform:scale(1.04)}
+  .cat .img.empty{display:flex;align-items:center;justify-content:center;color:var(--olive)}
+  .cat .img.empty svg{width:42px;height:42px}
+  .cat .label{padding:16px 18px;display:flex;justify-content:space-between;align-items:center;font-size:17px;font-weight:600}
+  .cat .label::after{content:"→";color:var(--green);font-size:18px}
+
+  /* Producten */
+  .products{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .product{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 22px;display:flex;flex-direction:column}
+  .product .img{aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--soft);margin-bottom:18px}
+  .product .img img{width:100%;height:100%;object-fit:cover}
+  .product h3 a{color:var(--ink)}
+  .product .meta{font-size:14px;color:var(--ink-2);margin-top:4px}
+  .product .row{display:flex;justify-content:space-between;align-items:flex-end;margin-top:auto;padding-top:18px}
+  .product .price{font-size:20px;font-weight:700}
+  .product .price small{display:block;font-size:13px;font-weight:500;color:var(--ink-2)}
+  .product .add{font-size:14px;padding:10px 16px}
+
+  /* Twee kolommen */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+  .split img{width:100%;border-radius:var(--radius);aspect-ratio:4/3;object-fit:cover}
+  .split p{margin-top:16px}
+
+  /* Waarom */
+  .why{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .why div{background:var(--white);border-radius:var(--radius);padding:30px 28px;border:1px solid var(--line)}
+  .why .ic{width:44px;height:44px;border-radius:12px;background:#eef7dc;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .why .ic img{width:24px;height:24px}
+
+  /* Zakelijk */
+  .biz{margin-top:22px;background:var(--white);border-radius:var(--radius);padding:52px;display:flex;justify-content:space-between;align-items:center;gap:40px;border:1px solid var(--line);border-left:6px solid var(--green)}
+  .biz p{color:var(--ink-2);max-width:560px;margin-top:12px}
+
+  /* Showtuin */
+  .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:250px 250px;gap:14px}
+  .gallery img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+  .gallery img:first-child{grid-row:span 2}
+  .visit{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px;padding-top:36px;border-top:1px solid rgba(255,255,255,.12);font-size:16px}
+  .visit strong{display:block;color:#fff;font-weight:600;margin-bottom:4px}
+
+  /* Footer */
+  footer{overflow-wrap:anywhere;background:var(--soft);font-size:14px;color:var(--ink-2);padding:56px 0 28px}
+  .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+  footer img{height:34px;width:auto;margin-bottom:16px}
+  footer h4{color:var(--ink);font-size:15px;font-weight:700;margin-bottom:12px}
+  footer ul{list-style:none}
+  footer li{margin-bottom:8px}
+  footer a{color:var(--ink-2)}
+  footer a:hover{color:var(--ink)}
+  footer p{max-width:400px}
+  .social{display:flex;gap:18px;margin-top:16px;font-weight:600}
+  .bottom{padding-top:20px;font-size:13px}
+
+  /* WhatsApp */
+  .wa{position:fixed;right:22px;bottom:22px;width:56px;height:56px;border-radius:50%;background:#25d366;box-shadow:0 6px 20px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;z-index:60}
+  .wa svg{width:28px;height:28px;fill:#fff}
+
+  @media (max-width:1180px){.rating{display:none}}
+  @media (max-width:980px){
+    .nav ul,.rating{display:none}
+    .menu-btn{display:block}
+    .nav{justify-content:space-between}
+    .usps ul{grid-template-columns:repeat(2,1fr)}
+    .cats{grid-template-columns:repeat(2,1fr)}
+    .products{grid-template-columns:repeat(2,1fr)}
+    .split{grid-template-columns:1fr;gap:36px}
+    .why{grid-template-columns:repeat(2,1fr)}
+    .biz{flex-direction:column;align-items:flex-start;padding:36px 28px}
+    .gallery{grid-template-columns:1fr 1fr;grid-template-rows:220px 160px 160px}
+    .gallery img:first-child{grid-column:span 2;grid-row:auto}
+    .visit{grid-template-columns:1fr}
+    .fgrid{grid-template-columns:1fr 1fr}
+    .fgrid>div:first-child{grid-column:span 2}
+  }
+  @media (max-width:600px){
+    .tile{padding:68px 0}
+    .hero{min-height:540px}
+    .hero::after{background:linear-gradient(180deg,rgba(18,22,6,.45),rgba(18,22,6,.85))}
+    .notice span:not(:first-child){display:none}
+    .usps ul{grid-template-columns:1fr;gap:12px}
+    .products,.why{grid-template-columns:1fr}
+    .fgrid{grid-template-columns:1fr}
+    .fgrid>div:first-child{grid-column:auto}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Ga naar de inhoud</a>
+
+<div class="stripe"></div>
+<div class="notice">
+  <span>A-kwaliteit voor groothandelsprijzen</span>
+  <span>Dagelijks nieuwe aanbiedingen</span>
+  <span>Bel of WhatsApp: <a href="tel:085-0805227">085-0805227</a></span>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="https://gigatuin.youriparlevliet.nl/" aria-label="GigaTuin home">
+      <img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/logo.png" alt="GigaTuin – uw tuinmaterialen gigant">
+    </a>
+    <ul>
+      <li><a class="active" href="https://gigatuin.youriparlevliet.nl/">Home</a></li>
+      <li><a href="https://gigatuin.youriparlevliet.nl/product-category/alle-categorieen/">Tuinmaterialen</a></li>
+      <li><a href="https://gigatuin.youriparlevliet.nl/product-category/outlet/">Outlet</a></li>
+      <li><a href="https://gigatuin.youriparlevliet.nl/showtuin-waddinxveen/">Showtuin</a></li>
+      <li><a href="https://gigatuin.youriparlevliet.nl/service-levering/">Servicegebied</a></li>
+      <li><a href="https://gigatuin.youriparlevliet.nl/over-gigatuin/">Over ons</a></li>
+      <li><a href="https://gigatuin.youriparlevliet.nl/contact/">Contact</a></li>
+    </ul>
+    <div class="tools">
+      <a href="https://gigatuin.youriparlevliet.nl/?s=&post_type=product" aria-label="Zoeken">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      </a>
+      <a href="https://gigatuin.youriparlevliet.nl/my-account/" aria-label="Inloggen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </a>
+      <a href="https://gigatuin.youriparlevliet.nl/winkelwagen/" aria-label="Winkelwagen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="badge">0</span>
+      </a>
+      <a class="rating" href="https://www.google.com/search?q=Gigatuin" aria-label="Google-beoordeling 4,8 van 5">
+        <span class="stars">★</span><b>4,8/5</b> · 81 Google-reviews
+      </a>
+      <button class="menu-btn" aria-label="Menu" aria-expanded="false" onclick="var m=document.getElementById('mobile');m.classList.toggle('open');this.setAttribute('aria-expanded',m.classList.contains('open'))">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile" id="mobile">
+    <a href="https://gigatuin.youriparlevliet.nl/product-category/alle-categorieen/">Tuinmaterialen</a>
+    <a href="https://gigatuin.youriparlevliet.nl/product-category/bestrating/">Bestrating</a>
+    <a href="https://gigatuin.youriparlevliet.nl/product-category/outlet/">Outlet</a>
+    <a href="https://gigatuin.youriparlevliet.nl/showtuin-waddinxveen/">Showtuin Waddinxveen</a>
+    <a href="https://gigatuin.youriparlevliet.nl/service-levering/">Servicegebied</a>
+    <a href="https://gigatuin.youriparlevliet.nl/over-gigatuin/">Over Gigatuin</a>
+    <a href="https://gigatuin.youriparlevliet.nl/contact/">Contact</a>
+  </nav>
+</header>
+
+<main id="content">
+
+  <!-- Hero -->
+  <section class="hero">
+    <img class="bg" src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/05/Mega-Slider1.png" alt="Terras met bestrating en overkapping">
+    <div class="wrap">
+      <div class="inner">
+        <p class="eyebrow">Welkom bij GigaTuin</p>
+        <h1>De voordeligste keuze voor tuin en <em>bestrating</em>.</h1>
+        <p>Tuintegels, klinkers en accessoires van topkwaliteit. Scherp geprijsd en snel geleverd, online én in onze showtuin in Waddinxveen.</p>
+        <div class="actions">
+          <a class="btn" href="https://gigatuin.youriparlevliet.nl/product-category/alle-categorieen/">Bekijk producten →</a>
+          <a class="btn ghost" href="https://gigatuin.youriparlevliet.nl/showtuin-waddinxveen/">Bezoek de showtuin</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP's: één keer, rustig onder de hero -->
+  <section class="usps">
+    <div class="wrap">
+      <ul>
+        <li>Beste deals op tuintegels</li>
+        <li>Grootste keuze in bestrating</li>
+        <li>Dagelijks nieuwe aanbiedingen</li>
+        <li>A-kwaliteit, groothandelsprijzen</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Categorieën -->
+  <section class="tile white">
+    <div class="wrap">
+      <div class="head center">
+        <p class="eyebrow">Categorieën</p>
+        <h2>Alles wat jouw tuin nodig heeft</h2>
+      </div>
+      <div class="cats">
+        <a class="cat" href="https://gigatuin.youriparlevliet.nl/product-category/bestrating/">
+          <div class="img"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/Frame-2147225631eee.png" alt="" loading="lazy"></div>
+          <div class="label">Bestrating</div>
+        </a>
+        <a class="cat" href="https://gigatuin.youriparlevliet.nl/product-category/grind-split/">
+          <div class="img"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/05/smarttrade-351.jpg" alt="" loading="lazy"></div>
+          <div class="label">Grind &amp; split</div>
+        </a>
+        <a class="cat" href="https://gigatuin.youriparlevliet.nl/product-category/tuinhout/">
+          <div class="img"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/Frame-2147225630v.png" alt="" loading="lazy"></div>
+          <div class="label">Tuinhout</div>
+        </a>
+        <a class="cat" href="https://gigatuin.youriparlevliet.nl/product-category/kunstgras-2/">
+          <div class="img"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/02/art4313-kunstgras-budget-30mm-rolbreedte-200-of-400cm-1.jpg" alt="" loading="lazy"></div>
+          <div class="label">Kunstgras</div>
+        </a>
+        <a class="cat" href="https://gigatuin.youriparlevliet.nl/product-category/zand-grond/">
+          <div class="img"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/11/smarttrade-2224.jpg" alt="" loading="lazy"></div>
+          <div class="label">Zand &amp; grond</div>
+        </a>
+        <a class="cat" href="https://gigatuin.youriparlevliet.nl/product-category/verlichting-2/">
+          <div class="img empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg></div>
+          <div class="label">Verlichting</div>
+        </a>
+        <a class="cat" href="https://gigatuin.youriparlevliet.nl/product-category/diverse/">
+          <div class="img"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/11/smarttrade-2355.webp" alt="" loading="lazy"></div>
+          <div class="label">Diverse</div>
+        </a>
+        <a class="cat" href="https://gigatuin.youriparlevliet.nl/product-category/outlet/">
+          <div class="img"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/d9b0d0a33a12b0d7b57ce5ac30fc89f4fdc8d872-1024x681.png" alt="" loading="lazy"></div>
+          <div class="label">Outlet</div>
+        </a>
+      </div>
+      <p class="center" style="margin-top:40px"><a class="link-arrow" href="https://gigatuin.youriparlevliet.nl/product-category/alle-categorieen/">Alle categorieën</a></p>
+    </div>
+  </section>
+
+  <!-- Populair -->
+  <section class="tile soft">
+    <div class="wrap">
+      <div class="head center">
+        <p class="eyebrow">Populair</p>
+        <h2>Onze meest gekozen producten</h2>
+        <p class="sub">Levering in 1–10 werkdagen, meestal sneller.</p>
+      </div>
+      <div class="products">
+        <article class="product">
+          <a class="img" href="https://gigatuin.youriparlevliet.nl/product/linia-excellence-15x15x60-cm-nero/"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/11/smarttrade-984.jpg" alt="Linia Excellence 15x15x60 cm Nero" loading="lazy"></a>
+          <h3><a href="https://gigatuin.youriparlevliet.nl/product/linia-excellence-15x15x60-cm-nero/">Linia Excellence 15x15x60 cm Nero</a></h3>
+          <p class="meta">Bestrating</p>
+          <div class="row">
+            <p class="price">€ 5,75<small>per stuk</small></p>
+            <a class="btn add" href="https://gigatuin.youriparlevliet.nl/?add-to-cart=25198">In winkelwagen</a>
+          </div>
+        </article>
+        <article class="product">
+          <a class="img" href="https://gigatuin.youriparlevliet.nl/product/opsluitband-antraciet-2/"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/11/smarttrade-188.jpg" alt="Opsluitband Antraciet" loading="lazy"></a>
+          <h3><a href="https://gigatuin.youriparlevliet.nl/product/opsluitband-antraciet-2/">Opsluitband Antraciet</a></h3>
+          <p class="meta">Bestrating</p>
+          <div class="row">
+            <p class="price">vanaf € 4,95<small>per stuk</small></p>
+            <a class="link-arrow" style="font-size:14px" href="https://gigatuin.youriparlevliet.nl/product/opsluitband-antraciet-2/">Bekijk opties</a>
+          </div>
+        </article>
+        <article class="product">
+          <a class="img" href="https://gigatuin.youriparlevliet.nl/product/25-kg-graphite-sparkle-01-12-mm/"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/11/smarttrade-361.jpg" alt="25 kg Graphite Sparkle 0,1-1,2 mm" loading="lazy"></a>
+          <h3><a href="https://gigatuin.youriparlevliet.nl/product/25-kg-graphite-sparkle-01-12-mm/">Graphite Sparkle 0,1–1,2 mm</a></h3>
+          <p class="meta">Zak van 25 kg</p>
+          <div class="row">
+            <p class="price">€ 11,96<small>per zak</small></p>
+            <a class="btn add" href="https://gigatuin.youriparlevliet.nl/?add-to-cart=25011">In winkelwagen</a>
+          </div>
+        </article>
+        <article class="product">
+          <a class="img" href="https://gigatuin.youriparlevliet.nl/product/limburgs-grind-8-16-mm/"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/05/smarttrade-228.jpg" alt="Limburgs grind 8-16 mm" loading="lazy"></a>
+          <h3><a href="https://gigatuin.youriparlevliet.nl/product/limburgs-grind-8-16-mm/">Limburgs grind 8–16 mm</a></h3>
+          <p class="meta">Grind &amp; split</p>
+          <div class="row">
+            <p class="price">vanaf € 4,95<small>per zak</small></p>
+            <a class="link-arrow" style="font-size:14px" href="https://gigatuin.youriparlevliet.nl/product/limburgs-grind-8-16-mm/">Bekijk opties</a>
+          </div>
+        </article>
+        <article class="product">
+          <a class="img" href="https://gigatuin.youriparlevliet.nl/product/basalt-split-8-11-mm/"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/05/smarttrade-205.jpg" alt="Basalt split 8-11 mm" loading="lazy"></a>
+          <h3><a href="https://gigatuin.youriparlevliet.nl/product/basalt-split-8-11-mm/">Basalt split 8–11 mm</a></h3>
+          <p class="meta">Grind &amp; split</p>
+          <div class="row">
+            <p class="price">vanaf € 5,95<small>per zak</small></p>
+            <a class="link-arrow" style="font-size:14px" href="https://gigatuin.youriparlevliet.nl/product/basalt-split-8-11-mm/">Bekijk opties</a>
+          </div>
+        </article>
+        <article class="product">
+          <a class="img" href="https://gigatuin.youriparlevliet.nl/product/potgrond-universeel-40-liter/"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/11/smarttrade-2222.jpg" alt="Potgrond Universeel 40 liter" loading="lazy"></a>
+          <h3><a href="https://gigatuin.youriparlevliet.nl/product/potgrond-universeel-40-liter/">Potgrond Universeel 40 liter</a></h3>
+          <p class="meta">Zand &amp; grond</p>
+          <div class="row">
+            <p class="price">€ 5,95<small>per stuk</small></p>
+            <a class="btn add" href="https://gigatuin.youriparlevliet.nl/?add-to-cart=25429">In winkelwagen</a>
+          </div>
+        </article>
+      </div>
+      <p class="center" style="margin-top:40px"><a class="link-arrow" href="https://gigatuin.youriparlevliet.nl/product-tag/populair/">Alle populaire producten</a></p>
+    </div>
+  </section>
+
+  <!-- Over GigaTuin (donker) -->
+  <section class="tile dark">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Over GigaTuin</p>
+        <h2>Eenvoudig bestellen, persoonlijk advies</h2>
+        <p>Van sierbestrating en klinkers tot keramische tegels en accessoires: bij GigaTuin vind je alles voor je tuinproject, in goede kwaliteit en voor een scherpe prijs.</p>
+        <p>Je bestelt eenvoudig via de webshop en we leveren snel. Vragen over levertijden of advies nodig? Bel of WhatsApp ons via <a href="tel:085-0805227">085-0805227</a> of mail naar <a href="mailto:info@gigatuin.youriparlevliet.nl">info@gigatuin.youriparlevliet.nl</a>.</p>
+        <div class="actions" style="justify-content:flex-start">
+          <a class="link-arrow" href="https://gigatuin.youriparlevliet.nl/over-gigatuin/">Meer over ons</a>
+        </div>
+      </div>
+      <img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/Rectangle-34625922.png" alt="Aangelegde tuin met bestrating" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Waarom GigaTuin -->
+  <section class="tile soft">
+    <div class="wrap">
+      <div class="head center">
+        <p class="eyebrow">Waarom GigaTuin</p>
+        <h2>Kwaliteit, service en eerlijk advies</h2>
+      </div>
+      <div class="why">
+        <div><span class="ic"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/leaf.svg" alt=""></span><h3>Ruim en compleet assortiment</h3></div>
+        <div><span class="ic"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/02/Group-1000012986.svg" alt=""></span><h3>Duurzame, sterke materialen</h3></div>
+        <div><span class="ic"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/truck.svg" alt=""></span><h3>Snelle, betrouwbare levering</h3></div>
+        <div><span class="ic"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/02/Group-1000012991111.svg" alt=""></span><h3>Persoonlijk en eerlijk advies</h3></div>
+        <div><span class="ic"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/02/Group.svg" alt=""></span><h3>Altijd lage, eerlijke prijzen</h3></div>
+        <div><span class="ic"><img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/02/Group556.svg" alt=""></span><h3>Tevreden, trouwe klanten</h3></div>
+      </div>
+
+      <div class="biz" style="margin-top:20px">
+        <div>
+          <p class="eyebrow">Zakelijke klanten</p>
+          <h2 style="font-size:clamp(26px,3vw,34px)">Voor hoveniers, stratenmakers en aannemers</h2>
+          <p>Scherpe prijzen, snelle levering en één vast aanspreekpunt voor elk project.</p>
+        </div>
+        <a class="btn" href="https://gigatuin.youriparlevliet.nl/contact/">Neem contact op</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Showtuin (donker) -->
+  <section class="tile dark">
+    <div class="wrap">
+      <div class="head center">
+        <p class="eyebrow">Showtuin Waddinxveen</p>
+        <h2>Zie en voel het materiaal zelf</h2>
+        <p class="sub">Kom langs en vergelijk kleuren, structuren en stijlen in het echt.</p>
+      </div>
+      <div class="gallery">
+        <img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/Frame-21666.png" alt="Showtuin GigaTuin" loading="lazy">
+        <img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/Frame-4567.png" alt="" loading="lazy">
+        <img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/Frame-214722.png" alt="" loading="lazy">
+        <img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/Frame-555.png" alt="" loading="lazy">
+        <img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/Frame-2147225629.png" alt="" loading="lazy">
+      </div>
+      <div class="visit">
+        <div><strong>Adres</strong><a href="https://maps.app.goo.gl/nEYxfkFoCcksv3ceA">Noordeinde 76a, 2742 AC Waddinxveen</a></div>
+        <div><strong>Openingstijden</strong>Ma–vr 9:00–17:30 · Za 9:00–17:00</div>
+        <div><strong>Advies nodig?</strong><a href="https://wa.me/31850805227">WhatsApp</a> of bel <a href="tel:085-0805227">085-0805227</a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <img src="https://gigatuin.youriparlevliet.nl/wp-content/uploads/2026/01/logo.png" alt="GigaTuin">
+        <p>GigaTuin is dé specialist in bestratings- en tuinmaterialen. Met een ruim assortiment, scherpe prijzen en persoonlijk advies helpen we je je droomtuin te realiseren.</p>
+        <div class="social">
+          <a href="https://www.facebook.com/gigatuin/">Facebook</a>
+          <a href="https://www.instagram.com/gigatuin/">Instagram</a>
+          <a href="https://www.linkedin.com/in/julian-vd-eijk-1392bb209/?originalSubdomain=nl">LinkedIn</a>
+        </div>
+      </div>
+      <div>
+        <h4>Klantenservice</h4>
+        <ul>
+          <li><a href="https://gigatuin.youriparlevliet.nl/leveringsvoorwaarden/">Leveringsvoorwaarden</a></li>
+          <li><a href="https://gigatuin.youriparlevliet.nl/werkwijze/">Werkwijze</a></li>
+          <li><a href="https://gigatuin.youriparlevliet.nl/service-levering/">Servicegebied</a></li>
+          <li><a href="https://gigatuin.youriparlevliet.nl/privacy-policy/">Privacyverklaring</a></li>
+          <li><a href="https://gigatuin.youriparlevliet.nl/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact &amp; showtuin</h4>
+        <ul>
+          <li><a href="https://maps.app.goo.gl/nEYxfkFoCcksv3ceA">Noordeinde 76a<br>2742 AC Waddinxveen</a></li>
+          <li><a href="tel:085-0805227">085-0805227</a></li>
+          <li><a href="mailto:info@gigatuin.youriparlevliet.nl">info@gigatuin.youriparlevliet.nl</a></li>
+          <li>Ma–vr 9:00–17:30<br>Za 9:00–17:00</li>
+        </ul>
+      </div>
+    </div>
+    <p class="bottom">Copyright © 2026 GigaTuin. Alle rechten voorbehouden.</p>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/31850805227" aria-label="Chat via WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.3-.5-.5-1-1.1-1.3-1.7-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.6.6-.9 1.4-.9 2.2 0 .9.4 1.8 1 2.6 1.1 1.6 2.5 2.9 4.2 3.6 1.5.6 2.1.7 2.8.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+</a>
+
+</body>
+</html>
